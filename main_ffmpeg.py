@@ -93,15 +93,15 @@ try:
         if not u32.GetForegroundWindow() == game_hwnd:
             # Not Focused
             continue
-        real_x, real_y = get_win_top_left(game_hwnd)
-        if not get_win_size(game_hwnd) == win_size:
-            win_size = get_win_size(game_hwnd)
-            cnt += 1
-            raise RuntimeError('Window Size changed, using new output')
         new_text = get_win_cap(hg_hwnd)
         if new_text == hg_text:
             continue
         hg_text = new_text
+        real_x, real_y = get_win_top_left(game_hwnd)
+        if not get_win_size(game_hwnd) == win_size:
+            win_size = get_win_size(game_hwnd)
+            cnt += 1
+            raise RuntimeError('Window Size changed')
         time.sleep(0.001)
         sct_img = sct.grab({
             'left': real_x,
